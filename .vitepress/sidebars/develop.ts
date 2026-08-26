@@ -170,6 +170,10 @@ export default [
         text: "develop.entities.damage_types",
         link: "/develop/entities/damage-types",
       },
+      {
+        text: "develop.entities.projectiles",
+        link: "/develop/entities/projectiles",
+      }
     ],
   },
   {
