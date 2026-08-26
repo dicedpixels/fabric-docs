@@ -173,7 +173,7 @@ export default [
       {
         text: "develop.entities.projectiles",
         link: "/develop/entities/projectiles",
-      }
+      },
     ],
   },
   {
