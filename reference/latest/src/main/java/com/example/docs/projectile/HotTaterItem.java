@@ -1,6 +1,6 @@
 package com.example.docs.projectile;
 
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
@@ -15,6 +15,7 @@ import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 
 // #region item
+@NullMarked
 public class HotTaterItem extends Item implements ProjectileItem {
 	public HotTaterItem(Properties properties) {
 		super(properties);
@@ -22,17 +23,14 @@ public class HotTaterItem extends Item implements ProjectileItem {
 
 	// #region as_projectile
 	@Override
-	public @NonNull Projectile asProjectile(@NonNull Level level,
-											@NonNull Position position,
-											@NonNull ItemStack itemStack,
-											@NonNull Direction direction) {
+	public Projectile asProjectile(Level level, Position position, ItemStack itemStack, Direction direction) {
 		return new HotTaterEntity(level, position.x(), position.y(), position.z(), itemStack);
 	}
 	// #endregion as_projectile
 
 	// #region use
 	@Override
-	public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack itemStack = player.getItemInHand(hand);
 
 		// Spawn the projectile on the server only.

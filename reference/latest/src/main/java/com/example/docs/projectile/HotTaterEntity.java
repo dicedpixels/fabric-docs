@@ -1,6 +1,6 @@
 package com.example.docs.projectile;
 
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
@@ -15,6 +15,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
 // #region entity
+@NullMarked
 public class HotTaterEntity extends ThrowableItemProjectile {
 	// #region constructors
 	public HotTaterEntity(EntityType<? extends ThrowableItemProjectile> type, Level level) {
@@ -32,14 +33,14 @@ public class HotTaterEntity extends ThrowableItemProjectile {
 
 	// #region default_item
 	@Override
-	protected @NonNull Item getDefaultItem() {
+	protected Item getDefaultItem() {
 		return ExampleModProjectile.HOT_TATER_ITEM;
 	}
 	// #endregion default_item
 
 	// #region on_hit
 	@Override
-	protected void onHit(@NonNull HitResult hitResult) {
+	protected void onHit(HitResult hitResult) {
 		super.onHit(hitResult);
 		Level level = level();
 
@@ -63,7 +64,7 @@ public class HotTaterEntity extends ThrowableItemProjectile {
 
 	// #region on_hit_entity
 	@Override
-	protected void onHitEntity(@NonNull EntityHitResult hitResult) {
+	protected void onHitEntity(EntityHitResult hitResult) {
 		super.onHitEntity(hitResult);
 
 		// Only modify the world on the server.
