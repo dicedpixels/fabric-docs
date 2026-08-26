@@ -16,7 +16,7 @@ resources:
   https://docs.neoforged.net/docs/entities/#projectiles: Projectiles - NeoForge Docs (except Neo exclusives)
 ---
 
-Projectiles are entities that can be thrown or fired by players, other entities and dispensers. In this guide, we'll look into implementing a simple projectile like a snowball.
+Projectiles are entities that can be thrown or fired by players or other entities. In this guide, we'll look into implementing a simple projectile like a snowball.
 
 We'll call our projectile a Hot Tater. It will be a potato that sets the block or entity it hits on fire.
 
@@ -36,7 +36,7 @@ There's quite a lot happening here. Let's look at the important code sections.
 
 ### Constructors {#constructors}
 
-We define 3 constructors. They're used by entity registration, projectile spawning and projectile conversion (for example, by dispensers) respectively.
+We define 3 constructors. They're used by entity registration, projectile spawning and projectile conversion respectively.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#constructors
 
@@ -82,7 +82,7 @@ We override `asProjectile()` and `use()`.
 
 **`asProjectile()`**
 
-This method converts the item into its entity form. Used when the item is shot from a dispenser instead of thrown by a player.
+This method converts the item into its entity form.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterItem.java#as_projectile
 
@@ -124,7 +124,7 @@ Like other entities, we use `EntityType.Builder`. We call the `of()` method with
 
 ### Registering the Item {#registering-the-item}
 
-We do a simple item registration. This code will also be in your `main` source set.
+We register the item using the `register` method from our `ModItems` class, created in the [Creating Your First Item](../items/first-item#preparing-your-items-class) guide. This code will also be in your `main` source set.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#register_item
 
@@ -142,6 +142,10 @@ At this point, you can obtain the projectile item in game and test out the funct
 
 ## Finalizing the Item {#finalizing-the-item}
 
-Even though our projectile works, it still doesn't have a model, texture or a name. Follow the [Creating Your First Item](../items/first-item) guide to add these and finalize the item.
+Even though our projectile works, it still doesn't have a model, texture, client item or a name. Items require a [model](../items/first-item#adding-a-model), [texture](../items/first-item#adding-a-texture), and [client item](../items/first-item#creating-the-client-item) with the name `hot_tater` in order to render correctly. You'll also want a [translation](../items/first-item#naming-the-item) to give the item a proper name. An example texture is provided below.
+
+<DownloadEntry visualURL="/assets/develop/projectiles/hot_tater.png" downloadURL="/assets/develop/projectiles/hot_tater_small.png">Texture</DownloadEntry>
+
+Now you can test your projectile in game.
 
 <VideoPlayer src="/assets/develop/projectiles/hot-tater.mp4">A Hot Tater setting a villager on fire</VideoPlayer>

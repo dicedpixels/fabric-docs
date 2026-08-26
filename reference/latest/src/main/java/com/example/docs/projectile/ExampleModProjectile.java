@@ -34,11 +34,10 @@ public class ExampleModProjectile implements ModInitializer {
 	// #endregion register_entity
 
 	// #region register_item
-	public static final Item HOT_TATER_ITEM = Registry.register(
-					BuiltInRegistries.ITEM,
-					HOT_TATER_ID,
-					new HotTaterItem(new Item.Properties().stacksTo(16)
-									.setId(ResourceKey.create(Registries.ITEM, HOT_TATER_ID))));
+	public static final Item HOT_TATER_ITEM = ModItems.register(
+					ResourceKey.create(Registries.ITEM, HOT_TATER_ID),
+					HotTaterItem::new,
+					new Item.Properties().stacksTo(16));
 	// #endregion register_item
 
 	@Override

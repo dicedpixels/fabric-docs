@@ -26,7 +26,6 @@ public class HotTaterItem extends Item implements ProjectileItem {
 											@NonNull Position position,
 											@NonNull ItemStack itemStack,
 											@NonNull Direction direction) {
-		// Used when the item is shot from a dispenser instead of thrown by a player.
 		return new HotTaterEntity(level, position.x(), position.y(), position.z(), itemStack);
 	}
 	// #endregion as_projectile
