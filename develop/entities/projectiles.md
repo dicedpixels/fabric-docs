@@ -143,3 +143,5 @@ At this point, you can obtain the projectile item in game and test out the funct
 ## Finalizing the Item {#finalizing-the-item}
 
 Even though our projectile works, it still doesn't have a model, texture or a name. Follow the [Creating Your First Item](../items/first-item) guide to add these and finalize the item.
+
+<VideoPlayer src="/assets/develop/projectiles/hot-tater.mp4">A Hot Tater setting a villager on fire</VideoPlayer>
