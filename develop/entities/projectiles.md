@@ -15,3 +15,131 @@ resources:
   https://minecraft.wiki/w/Projectile: Projectiles - Minecraft Wiki
   https://docs.neoforged.net/docs/entities/#projectiles: Projectiles - NeoForge Docs (except Neo exclusives)
 ---
+
+Projectiles are entities that can be thrown or fired by players, other entities and dispensers. In this guide, we'll look into implementing a simple projectile like a snowball.
+
+We'll call our projectile a Hot Tater. It will be a potato that sets the block or entity it hits on fire.
+
+## Prerequisites {#prerequisites}
+
+Creating a projectile requires you to register an item as well as an entity. Therefore we suggest going through the [Creating Your First Item](../items/first-item) and [Creating Your First Entity](./first-entity) guides.
+
+## Creating the Projectile Entity {#creating-the-projectile-entity}
+
+Let's create `HotTaterEntity` by extending `ThrowableItemProjectile`. This class should be in your `main` source set.
+
+The `ThrowableItemProjectile` class handles the physics logic and knows how to store the item form of the projectile.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#entity
+
+There's quite a lot happening here. Let's look at the important code sections.
+
+### Constructors {#constructors}
+
+We define 3 constructors. They're used by entity registration, projectile spawning and projectile conversion (for example, by dispensers) respectively.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#constructors
+
+### Overrides {#projectile-entity-overrides}
+
+We will be overriding `getDefaultItem()`, `onHit()` and `onHitEntity()`.
+
+**`getDefaultItem()`**
+
+Defines the item form of this projectile.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#default_item
+
+::: info
+
+We will register our item in a bit. You may also register the item first. See the [Registering the Item](#registering-the-item) section.
+
+:::
+
+**`onHit()`**
+
+Defines the behavior when this projectile hits a block. We check if the projectile has hit a block and then set the top face of that block on fire. This logic is handled on the server side.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit
+
+**`onHitEntity()`**
+
+Defines the behavior when this projectile hits an entity. We set the entity that was hit on fire for 5 seconds.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit_entity
+
+## Creating the Item {#creating-the-item}
+
+We register a simple item. Since we need to implement the throwing logic, our class `HotTaterItem` will extend `Item` and implement `ProjectileItem`. This class should be in your `main` source set.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterItem.java#item
+
+It's a simple item implementation with a standard constructor. But let's analyze the rest of the implementation.
+
+### Overrides {#item-overrides}
+
+We override `asProjectile()` and `use()`.
+
+**`asProjectile()`**
+
+This method converts the item into its entity form. Used when the item is shot from a dispenser instead of thrown by a player.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterItem.java#as_projectile
+
+**`use()`**
+
+Defines the action that happens when the item is used. In our case, we use the `Projectile.spawnProjectileFromRotation()` utility method to spawn the projectile. Finally, we consume one item from the stack and mark the interaction as successful.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterItem.java#use
+
+## Entity Renderer {#entity-renderer}
+
+Like most entities, your projectile will also need a renderer to render its visuals while it's on the move. For this guide, we'll be using Minecraft's built-in `ThrownItemRenderer`. If you need a custom renderer, you may implement your own by extending `EntityRenderer`. Like all kinds of rendering, this code will be in your `client` source set.
+
+## Registration {#registration}
+
+Now that we have a projectile entity and an item, we need to register them. In addition to these, we'll also register the entity renderer.
+
+For this example, our registration code will be in our normal and client initializers. You may organize your code as you see fit.
+
+**Initializer:**
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#entrypoint
+
+**Client Initializer:**
+
+<<< @/reference/latest/src/client/java/com/example/docs/projectile/ExampleModProjectileClient.java#entrypoint
+
+Let's analyze the code.
+
+For convenience, we define a shared identifier for both the entity and the item.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#identifier
+
+### Registering the Entity {#registering-the-entity}
+
+Like other entities, we use `EntityType.Builder`. We call the `of()` method with a hitbox size, client tracking range and tick update interval. Finally we build the entity type by passing a `ResourceKey`. This entity type is then registered to the `ENTITY_TYPE` registry. This code will be in your `main` source set.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#register_entity
+
+### Registering the Item {#registering-the-item}
+
+We do a simple item registration. This code will also be in your `main` source set.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#register_item
+
+We also add the item to a creative tab for easy access.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#creative_tab
+
+### Registering the Renderer {#registering-the-renderer}
+
+We use the Minecraft-provided `ThrownItemRenderer` for our entity. This is the same renderer used by throwable items like the snowball.
+
+<<< @/reference/latest/src/client/java/com/example/docs/projectile/ExampleModProjectileClient.java#renderer
+
+At this point, you can obtain the projectile item in game and test out the functionality.
+
+## Finalizing the Item {#finalizing-the-item}
+
+Even though our projectile works, it still doesn't have a model, texture or a name. Follow the [Creating Your First Item](../items/first-item) guide to add these and finalize the item.

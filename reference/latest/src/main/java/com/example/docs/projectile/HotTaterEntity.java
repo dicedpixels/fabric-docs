@@ -16,12 +16,11 @@ import net.minecraft.world.phys.HitResult;
 
 // #region entity
 public class HotTaterEntity extends ThrowableItemProjectile {
-	// #endregion entity
+	// #region constructors
 	public HotTaterEntity(EntityType<? extends ThrowableItemProjectile> type, Level level) {
 		super(type, level);
 	}
 
-	// #region constructors
 	public HotTaterEntity(Level level, LivingEntity owner, ItemStack itemStack) {
 		super(ExampleModProjectile.HOT_TATER_ENTITY_TYPE, owner, level, itemStack);
 	}
@@ -43,16 +42,19 @@ public class HotTaterEntity extends ThrowableItemProjectile {
 	protected void onHit(@NonNull HitResult hitResult) {
 		super.onHit(hitResult);
 		Level level = level();
+
 		// Only modify the world on the server.
 		if (!level.isClientSide()) {
 			// If the projectile hits a block, place fire on the face it hit.
 			if (hitResult.getType() == HitResult.Type.BLOCK) {
 				BlockHitResult blockHitResult = (BlockHitResult) hitResult;
 				BlockPos pos = blockHitResult.getBlockPos().relative(blockHitResult.getDirection());
+
 				if (level.isEmptyBlock(pos)) {
 					level.setBlockAndUpdate(pos, BaseFireBlock.getState(level, pos));
 				}
 			}
+
 			// Remove the projectile after any hit, or it sinks into the ground forever.
 			discard();
 		}
@@ -63,6 +65,7 @@ public class HotTaterEntity extends ThrowableItemProjectile {
 	@Override
 	protected void onHitEntity(@NonNull EntityHitResult hitResult) {
 		super.onHitEntity(hitResult);
+
 		// Only modify the world on the server.
 		if (!level().isClientSide()) {
 			hitResult.getEntity().igniteForSeconds(5);
@@ -70,3 +73,4 @@ public class HotTaterEntity extends ThrowableItemProjectile {
 	}
 	// #endregion on_hit_entity
 }
+// #endregion entity

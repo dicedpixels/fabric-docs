@@ -17,7 +17,6 @@ import com.example.docs.item.ModItems;
 
 // #region entrypoint
 public class ExampleModProjectile implements ModInitializer {
-	// #endregion entrypoint
 	// #region identifier
 	// Shared identifier for both the item and the entity type.
 	public static final Identifier HOT_TATER_ID = Identifier.fromNamespaceAndPath(ExampleMod.MOD_ID, "hot_tater");
@@ -51,3 +50,4 @@ public class ExampleModProjectile implements ModInitializer {
 		// #endregion creative_tab
 	}
 }
+// #endregion entrypoint

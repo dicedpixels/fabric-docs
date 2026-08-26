@@ -16,7 +16,6 @@ import net.minecraft.world.level.Level;
 
 // #region item
 public class HotTaterItem extends Item implements ProjectileItem {
-	// #endregion item
 	public HotTaterItem(Properties properties) {
 		super(properties);
 	}
@@ -36,6 +35,7 @@ public class HotTaterItem extends Item implements ProjectileItem {
 	@Override
 	public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
 		ItemStack itemStack = player.getItemInHand(hand);
+
 		// Spawn the projectile on the server only.
 		if (level instanceof ServerLevel serverLevel) {
 			// Pitch offset = 0, power = 1.5, inaccuracy = 1.0.
@@ -47,8 +47,10 @@ public class HotTaterItem extends Item implements ProjectileItem {
 													1.5F,
 													1.0F);
 		}
+
 		itemStack.consume(1, player);
 		return InteractionResult.SUCCESS;
 	}
 	// #endregion use
 }
+// #endregion item
