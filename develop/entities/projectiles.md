@@ -3,6 +3,8 @@ title: Projectiles
 description: Learn how to add custom projectiles.
 authors:
   - ayutac
+  - cassiancc
+  - ChampionAsh5357
   - dicedpixels
   - haykam
   - kanpov
@@ -42,7 +44,7 @@ We define 3 constructors. They're used by entity registration, projectile spawni
 
 ### Overrides {#projectile-entity-overrides}
 
-We will be overriding `getDefaultItem()`, `onHit()` and `onHitEntity()`.
+We will be overriding `getDefaultItem()`, `onHitBlock()` and `onHitEntity()`.
 
 **`getDefaultItem()`**
 
@@ -56,9 +58,9 @@ We will register our item in a bit. You may also register the item first. See th
 
 :::
 
-**`onHit()`**
+**`onHitBlock()`**
 
-Defines the behavior when this projectile hits a block. We check if the projectile has hit a block and then set the top face of that block on fire. This logic is handled on the server side.
+Defines the behavior when this projectile hits a block. We check where the projectile has hit and then set the top face of that block on fire. This logic is handled on the server side.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit
 
@@ -88,7 +90,13 @@ This method converts the item into its entity form.
 
 **`use()`**
 
-Defines the action that happens when the item is used. In our case, we use the `Projectile.spawnProjectileFromRotation()` utility method to spawn the projectile. Finally, we consume one item from the stack and mark the interaction as successful.
+Defines the action that happens when the item is used. In our case, we use the `Projectile.spawnProjectileFromRotation()` utility method to spawn the projectile. In addition to the obvious parameters of the level, item stack, and player, this utility method takes three floats dictating the y-offset, power, and uncertainly.
+
+- **Y-Offset**: Changes the initial rotation of the y component.
+- **Power**: The scalar applied to the intial movement vector.
+- **Uncertainty**: Scales the `0.0172275` already applied inaccuracy, which skews the initial movement vector from a triangle distribution.
+
+Finally, we consume one item from the stack and mark the interaction as successful.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterItem.java#use
 

@@ -12,7 +12,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 
 // #region entity
 @NullMarked
@@ -40,20 +39,17 @@ public class HotTaterEntity extends ThrowableItemProjectile {
 
 	// #region on_hit
 	@Override
-	protected void onHit(HitResult hitResult) {
-		super.onHit(hitResult);
+	protected void onHitBlock(BlockHitResult hitResult) {
+		super.onHitBlock(hitResult);
 		Level level = level();
 
 		// Only modify the world on the server.
 		if (!level.isClientSide()) {
 			// If the projectile hits a block, place fire on the face it hit.
-			if (hitResult.getType() == HitResult.Type.BLOCK) {
-				BlockHitResult blockHitResult = (BlockHitResult) hitResult;
-				BlockPos pos = blockHitResult.getBlockPos().relative(blockHitResult.getDirection());
+			BlockPos pos = hitResult.getBlockPos().relative(hitResult.getDirection());
 
-				if (level.isEmptyBlock(pos)) {
-					level.setBlockAndUpdate(pos, BaseFireBlock.getState(level, pos));
-				}
+			if (level.isEmptyBlock(pos)) {
+				level.setBlockAndUpdate(pos, BaseFireBlock.getState(level, pos));
 			}
 
 			// Remove the projectile after any hit, or it sinks into the ground forever.
