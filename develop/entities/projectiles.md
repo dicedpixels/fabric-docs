@@ -44,7 +44,7 @@ We define 3 constructors. They're used by entity registration, projectile spawni
 
 ### Overrides {#projectile-entity-overrides}
 
-We will be overriding `getDefaultItem()`, `onHitBlock()` and `onHitEntity()`.
+We will be overriding `getDefaultItem()`, `onHitBlock()`, `onHitEntity()` and `onHit()`.
 
 **`getDefaultItem()`**
 
@@ -62,13 +62,19 @@ We will register our item in a bit. You may also register the item first. See th
 
 Defines the behavior when this projectile hits a block. We check where the projectile has hit and then set the top face of that block on fire. This logic is handled on the server side.
 
-<<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit_block
 
 **`onHitEntity()`**
 
 Defines the behavior when this projectile hits an entity. We set the entity that was hit on fire for 5 seconds.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit_entity
+
+**`onHit()`**
+
+Defines the behavior when this projectile hits anything, whether a block or an entity. Vanilla projectiles like the snowball discard themselves here so that the projectile is always removed on hit. Without this, a projectile that hits an entity would just keep going.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit
 
 ## Creating the Item {#creating-the-item}
 
@@ -90,11 +96,11 @@ This method converts the item into its entity form.
 
 **`use()`**
 
-Defines the action that happens when the item is used. In our case, we use the `Projectile.spawnProjectileFromRotation()` utility method to spawn the projectile. In addition to the obvious parameters of the level, item stack, and player, this utility method takes three floats dictating the y-offset, power, and uncertainly.
+Defines the action that happens when the item is used. In our case, we use the `Projectile.spawnProjectileFromRotation()` utility method to spawn the projectile. In addition to the obvious parameters of the level, item stack, and player, this utility method takes three floats dictating the y-offset, power, and uncertainty.
 
-- **Y-Offset**: Changes the initial rotation of the y component.
-- **Power**: The scalar applied to the intial movement vector.
-- **Uncertainty**: Scales the `0.0172275` already applied inaccuracy, which skews the initial movement vector from a triangle distribution.
+- **Y-Offset**: Rotation in the y direction (looking up or down).
+- **Power**: Scales how fast the projectile moves in blocks.
+- **Uncertainty**: Scales the randomness in what direction the projectile goes when shot.
 
 Finally, we consume one item from the stack and mark the interaction as successful.
 

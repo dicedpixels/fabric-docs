@@ -39,7 +39,7 @@ public class HotTaterItem extends Item implements ProjectileItem {
 
 		// Spawn the projectile on the server only.
 		if (level instanceof ServerLevel serverLevel) {
-			// Pitch offset = 0, power = 1.5, uncertainty = 1.0.
+			// Y-offset = 0, power = 1.5, uncertainty = 1.0.
 			Projectile.spawnProjectileFromRotation(HotTaterEntity::new,
 					serverLevel,
 					itemStack,
