@@ -44,11 +44,7 @@ We define 3 constructors. They're used by entity registration, projectile spawni
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#constructors
 
-### Overrides {#projectile-entity-overrides}
-
-We will be overriding `getDefaultItem()`, `onHitBlock()`, `onHitEntity()` and `onHit()`.
-
-**`getDefaultItem()`**
+### Overriding `getDefaultItem()` {#override-get-default-item}
 
 Defines the item form of this projectile.
 
@@ -86,17 +82,13 @@ We register a simple item. Since we need to implement the throwing logic, our cl
 
 It's a standard item implementation, with some special methods from `ProjectileItem`. Let's look at them:
 
-### Overrides {#item-overrides}
-
-We override `asProjectile()` and `use()`.
-
-**`asProjectile()`**
+### Overriding `asProjectile()` {#override-as-projectile}
 
 This method converts the item into its entity form.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterItem.java#as_projectile
 
-**`use()`**
+### Overriding `use()` {#pverride-use}
 
 Defines the action that happens when the item is used. In our case, we call the `Projectile.spawnProjectileFromRotation()` utility method to spawn the projectile.
 
