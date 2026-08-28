@@ -39,14 +39,13 @@ public class HotTaterItem extends Item implements ProjectileItem {
 
 		// Spawn the projectile on the server only.
 		if (level instanceof ServerLevel serverLevel) {
-			// Y-offset = 0, power = 1.5, uncertainty = 1.0.
 			Projectile.spawnProjectileFromRotation(HotTaterEntity::new,
 					serverLevel,
 					itemStack,
 					player,
-					0.0F,
-					1.5F,
-					1.0F);
+					/* yOffset: */ 0.0F,
+					/* power: */ 1.5F,
+					/* uncertainty: */ 1.0F);
 		}
 
 		player.awardStat(Stats.ITEM_USED.get(this));

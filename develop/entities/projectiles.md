@@ -15,16 +15,18 @@ authors:
   - upcraftlp
 resources:
   https://minecraft.wiki/w/Projectile: Projectiles - Minecraft Wiki
-  https://docs.neoforged.net/docs/entities/#projectiles: Projectiles - NeoForge Docs (except Neo exclusives)
+  https://docs.neoforged.net/docs/entities/#projectiles: Projectiles - NeoForge Docs
 ---
 
 Projectiles are entities that can be thrown or fired by players or other entities. In this guide, we'll look into implementing a simple projectile like a snowball.
 
 We'll call our projectile a Hot Tater. It will be a potato that sets the block or entity it hits on fire.
 
-## Prerequisites {#prerequisites}
+::: info PREREQUISITES
 
 Creating a projectile requires you to register an item as well as an entity, therefore we suggest going through the [Creating Your First Item](../items/first-item) and [Creating Your First Entity](./first-entity) guides.
+
+:::
 
 ## Creating the Projectile Entity {#creating-the-projectile-entity}
 
@@ -60,7 +62,7 @@ Your IDE might tell you that it cannot resolve the item: we will create it soon,
 
 **`onHitBlock()`**
 
-Defines the behavior when this projectile hits a block. We check where the projectile has hit and then set the top face of that block on fire. This logic is handled on the server side.
+Defines the behavior when this projectile hits a block. We check where the projectile has hit and then set the hit face of that block on fire. This logic is handled on the server side.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit_block
 
@@ -72,7 +74,7 @@ Defines the behavior when this projectile hits an entity. We set the entity that
 
 **`onHit()`**
 
-Defines the behavior when this projectile hits anything, whether a block or an entity. Vanilla projectiles like the snowball discard themselves here so that the projectile is always removed on hit. Without this, a projectile that hits an entity would just keep going.
+Defines the behavior when this projectile hits anything, whether a block or an entity. We will use this to discard the projectile, so that it is removed on hit, without this, the projectile would just keep going.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit
 
@@ -104,7 +106,7 @@ In addition to the standard parameters (level, item stack, and player), this uti
 - **Power**: Scales how fast the projectile moves in blocks.
 - **Uncertainty**: Range of directions that the projectile can randomly go in when shot.
 
-Finally, we consume one item from the stack and mark the interaction as successful.
+Finally, we award the `ITEM_USED` stat, consume one item from the stack and mark the interaction as successful.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterItem.java#use
 
@@ -118,6 +120,10 @@ Now that we have a projectile entity and an item, we need to register them. In a
 
 For this example, our registration code will be in our main and client initializers.
 
+For convenience, we define a shared identifier for both the entity and the item.
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#identifier
+
 **Initializer:**
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#entrypoint
@@ -127,10 +133,6 @@ For this example, our registration code will be in our main and client initializ
 <<< @/reference/latest/src/client/java/com/example/docs/projectile/ExampleModProjectileClient.java#entrypoint
 
 Let's analyze the code.
-
-For convenience, we define a shared identifier for both the entity and the item.
-
-<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#identifier
 
 ### Registering the Entity {#registering-the-entity}
 

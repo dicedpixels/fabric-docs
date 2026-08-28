@@ -75,7 +75,7 @@ public class HotTaterEntity extends ThrowableItemProjectile {
 
 		// Discard the projectile on any hit, or it sinks into the ground forever.
 		if (!level().isClientSide()) {
-			discard();
+			this.discard();
 		}
 	}
 	// #endregion on_hit
