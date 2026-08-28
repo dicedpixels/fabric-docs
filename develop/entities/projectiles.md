@@ -1,5 +1,5 @@
 ---
-title: Projectiles
+title: Custom Projectiles
 description: Learn how to add custom projectiles.
 authors:
   - ayutac
@@ -56,21 +56,21 @@ Your IDE might tell you that it cannot resolve the item: we will create it soon,
 
 :::
 
-**`onHitBlock()`**
+### Overriding `onHitBlock()` {#override-on-hit-block}
 
 Defines the behavior when this projectile hits a block. We check where the projectile has hit and then set the hit face of that block on fire. This logic is handled on the server side.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit_block
 
-**`onHitEntity()`**
+### Overriding `onHitEntity()` {#override-on-hit-entity}
 
 Defines the behavior when this projectile hits an entity. We set the entity that was hit on fire for 5 seconds.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit_entity
 
-**`onHit()`**
+### Overriding `onHit()` {#override-on-hit}
 
-Defines the behavior when this projectile hits anything, whether a block or an entity. We will use this to discard the projectile, so that it is removed on hit, without this, the projectile would just keep going.
+Defines the behavior when this projectile hits anything, whether a block or an entity. We will use this to discard the projectile, so that it is removed on hit; without this, the projectile would just keep going.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#on_hit
 
@@ -88,7 +88,7 @@ This method converts the item into its entity form.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterItem.java#as_projectile
 
-### Overriding `use()` {#pverride-use}
+### Overriding `use()` {#override-use}
 
 Defines the action that happens when the item is used. In our case, we call the `Projectile.spawnProjectileFromRotation()` utility method to spawn the projectile.
 
