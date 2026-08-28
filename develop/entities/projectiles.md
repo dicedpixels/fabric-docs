@@ -154,11 +154,11 @@ We use the Minecraft-provided `ThrownItemRenderer` for our entity. This is the s
 
 <<< @/reference/latest/src/client/java/com/example/docs/projectile/ExampleModProjectileClient.java#renderer
 
-At this point, you can obtain the projectile item in game and test out the functionality.
-
 ## Finalizing the Item {#finalizing-the-item}
 
-Even though our projectile works, it still doesn't have a model, texture, client item or a name. Items require a [model](../items/first-item#adding-a-model), [texture](../items/first-item#adding-a-texture), and [client item](../items/first-item#creating-the-client-item) with the name `hot_tater` in order to render correctly. You'll also want a [translation](../items/first-item#naming-the-item) to give the item a proper name. An example texture is provided below.
+At this point, you can obtain the projectile item in game and test out the functionality.
+
+However, you'll notice it still doesn't have a [model](../items/first-item#adding-a-model), [texture](../items/first-item#adding-a-texture), [client item](../items/first-item#creating-the-client-item) or a [name](../items/first-item#naming-the-item). Let's create the files using the identifier `hot_tater` in order to render everything properly. An example texture is provided below.
 
 <DownloadEntry visualURL="/assets/develop/projectiles/hot_tater.png" downloadURL="/assets/develop/projectiles/hot_tater_small.png">Texture</DownloadEntry>
 
