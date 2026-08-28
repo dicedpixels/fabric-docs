@@ -24,13 +24,13 @@ We'll call our projectile a Hot Tater. It will be a potato that sets the block o
 
 ## Prerequisites {#prerequisites}
 
-Creating a projectile requires you to register an item as well as an entity. Therefore we suggest going through the [Creating Your First Item](../items/first-item) and [Creating Your First Entity](./first-entity) guides.
+Creating a projectile requires you to register an item as well as an entity, therefore we suggest going through the [Creating Your First Item](../items/first-item) and [Creating Your First Entity](./first-entity) guides.
 
 ## Creating the Projectile Entity {#creating-the-projectile-entity}
 
-Let's create `HotTaterEntity` by extending `ThrowableItemProjectile`. This class should be in your `main` source set.
+Let's create a `HotTaterEntity` by extending `ThrowableItemProjectile`. This class should be in your `main` source set.
 
-The `ThrowableItemProjectile` class handles the physics logic and knows how to store the item form of the projectile.
+The `ThrowableItemProjectile` class handles the physics and the item form of the projectile.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#entity
 
@@ -54,7 +54,7 @@ Defines the item form of this projectile.
 
 ::: info
 
-We will register our item in a bit. You may also register the item first. See the [Registering the Item](#registering-the-item) section.
+Your IDE might tell you that it cannot resolve the item: we will create it soon, in the [Registering the Item](#registering-the-item) section.
 
 :::
 
@@ -82,7 +82,7 @@ We register a simple item. Since we need to implement the throwing logic, our cl
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterItem.java#item
 
-It's a simple item implementation with a standard constructor. But let's analyze the rest of the implementation.
+It's a standard item implementation, with some special methods from `ProjectileItem`. Let's look at them:
 
 ### Overrides {#item-overrides}
 
@@ -96,11 +96,13 @@ This method converts the item into its entity form.
 
 **`use()`**
 
-Defines the action that happens when the item is used. In our case, we use the `Projectile.spawnProjectileFromRotation()` utility method to spawn the projectile. In addition to the obvious parameters of the level, item stack, and player, this utility method takes three floats dictating the y-offset, power, and uncertainty.
+Defines the action that happens when the item is used. In our case, we call the `Projectile.spawnProjectileFromRotation()` utility method to spawn the projectile.
+
+In addition to the standard parameters (level, item stack, and player), this utility method takes three additional floats:
 
 - **Y-Offset**: Rotation in the y direction (looking up or down).
 - **Power**: Scales how fast the projectile moves in blocks.
-- **Uncertainty**: Scales the randomness in what direction the projectile goes when shot.
+- **Uncertainty**: Range of directions that the projectile can randomly go in when shot.
 
 Finally, we consume one item from the stack and mark the interaction as successful.
 
@@ -114,7 +116,7 @@ Like most entities, your projectile will also need a renderer to render its visu
 
 Now that we have a projectile entity and an item, we need to register them. In addition to these, we'll also register the entity renderer.
 
-For this example, our registration code will be in our normal and client initializers. You may organize your code as you see fit.
+For this example, our registration code will be in our main and client initializers.
 
 **Initializer:**
 
@@ -160,6 +162,6 @@ Even though our projectile works, it still doesn't have a model, texture, client
 
 <DownloadEntry visualURL="/assets/develop/projectiles/hot_tater.png" downloadURL="/assets/develop/projectiles/hot_tater_small.png">Texture</DownloadEntry>
 
-Now you can test your projectile in game.
+Now you can test your projectile in-game:
 
 <VideoPlayer src="/assets/develop/projectiles/hot-tater.mp4">A Hot Tater setting a villager on fire</VideoPlayer>
