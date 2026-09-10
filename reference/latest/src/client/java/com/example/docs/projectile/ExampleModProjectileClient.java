@@ -5,12 +5,14 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 
 import net.fabricmc.api.ClientModInitializer;
 
+import com.example.docs.entity.ModEntityTypes;
+
 // #region entrypoint
 public class ExampleModProjectileClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		// region renderer
-		EntityRenderers.register(ExampleModProjectile.HOT_TATER_ENTITY_TYPE, ThrownItemRenderer::new);
+		EntityRenderers.register(ModEntityTypes.HOT_TATER, ThrownItemRenderer::new);
 		// endregion renderer
 	}
 }

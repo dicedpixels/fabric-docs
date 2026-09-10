@@ -122,7 +122,7 @@ Finally, we award the `ITEM_USED` stat, consume one item from the stack, and mar
 
 ## Registration {#registration}
 
-Register the item, like we did in the [Creating Your First Item](../items/first-item#registering-an-item) guide. We define a shared identifier for both the item and the entity:
+Register the item, like we did in the [Creating Your First Item](../items/first-item#registering-an-item) guide. We define an identifier for the item, which the entity type will also use:
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#identifier
 
@@ -132,9 +132,9 @@ Don't forget to add a [model](../items/first-item#adding-a-model), [texture](../
 
 <DownloadEntry visualURL="/assets/develop/projectiles/hot_tater_preview.png" downloadURL="/assets/develop/projectiles/hot_tater.png">Texture</DownloadEntry>
 
-Register the entity too, like we did in the [Creating Your First Entity](./first-entity#preparing-your-first-entity) guide:
+Register the entity too, like we did in the [Creating Your First Entity](./first-entity#preparing-your-first-entity) guide, by adding it as a static field in `ModEntityTypes`:
 
-<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#register_entity
+<<< @/reference/latest/src/main/java/com/example/docs/entity/ModEntityTypes.java#hot_tater
 
 Finally, let's use the vanilla `ThrownItemRenderer` in the client initializer:
 

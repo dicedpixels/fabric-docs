@@ -14,6 +14,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
+import com.example.docs.entity.ModEntityTypes;
+
 // #region entity
 @NullMarked
 public class HotTaterEntity extends ThrowableItemProjectile {
@@ -23,17 +25,20 @@ public class HotTaterEntity extends ThrowableItemProjectile {
 	}
 
 	public HotTaterEntity(Level level, LivingEntity owner, ItemStack itemStack) {
-		super(ExampleModProjectile.HOT_TATER_ENTITY_TYPE, owner, level, itemStack);
+		super(ModEntityTypes.HOT_TATER, owner, level, itemStack);
 	}
 
 	public HotTaterEntity(Level level, double x, double y, double z, ItemStack itemStack) {
-		super(ExampleModProjectile.HOT_TATER_ENTITY_TYPE, x, y, z, level, itemStack);
+		super(ModEntityTypes.HOT_TATER, x, y, z, level, itemStack);
 	}
 	// #endregion constructors
 
 	// #region default_item
 	@Override
 	protected Item getDefaultItem() {
+		// #endregion entity
+		// [!code warning:1]
+		// #region entity
 		return ExampleModProjectile.HOT_TATER_ITEM;
 	}
 	// #endregion default_item
