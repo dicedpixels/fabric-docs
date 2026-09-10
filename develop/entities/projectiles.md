@@ -54,7 +54,7 @@ Defines the item form of this projectile.
 
 ::: info
 
-Your IDE might tell you that it cannot resolve the item: we will create it soon, in the [Registering the Item](#registering-the-item) section.
+Your IDE might tell you that it cannot resolve the item: we will create it soon, in the [Registration](#registration) section.
 
 :::
 
@@ -120,60 +120,30 @@ Finally, we award the `ITEM_USED` stat, consume one item from the stack, and mar
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterItem.java#use
 
-## Entity Renderer {#entity-renderer}
-
-Like most entities, your projectile will also need a renderer to render its visuals while it's on the move. For this guide, we'll be using Minecraft's built-in `ThrownItemRenderer`. If you need a custom renderer, you may implement your own by extending `EntityRenderer`. Like all kinds of rendering, this code will be in your `client` source set.
-
 ## Registration {#registration}
 
-Now that we have a projectile entity and an item, we need to register them. In addition to these, we'll also register the entity renderer.
-
-For this example, our registration code will be in our main and client initializers.
-
-For convenience, we define a shared identifier for both the entity and the item.
+Register the item, like we did in the [Creating Your First Item](../items/first-item#registering-an-item) guide. We define a shared identifier for both the item and the entity:
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#identifier
 
-**Initializer:**
-
-<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#entrypoint
-
-**Client Initializer:**
-
-<<< @/reference/latest/src/client/java/com/example/docs/projectile/ExampleModProjectileClient.java#entrypoint
-
-Let's analyze the code.
-
-### Registering the Entity {#registering-the-entity}
-
-Like other entities, we use `EntityType.Builder`. We call the `of()` method with a hitbox size, client tracking range and tick update interval. Finally we build the entity type by passing a `ResourceKey`. This entity type is then registered to the `ENTITY_TYPE` registry. This code will be in your `main` source set.
-
-<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#register_entity
-
-### Registering the Item {#registering-the-item}
-
-We register the item using the `register` method from our `ModItems` class, created in the [Creating Your First Item](../items/first-item#preparing-your-items-class) guide. This code will also be in your `main` source set.
-
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#register_item
 
-We also add the item to a creative tab for easy access.
+We also add the item to a creative tab for easy access, like we did in the [Adding the Item to a Creative Tab](../items/first-item#adding-the-item-to-a-creative-tab) guide:
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#creative_tab
 
-### Registering the Renderer {#registering-the-renderer}
-
-We use the Minecraft-provided `ThrownItemRenderer` for our entity. This is the same renderer used by throwable items like the snowball.
-
-<<< @/reference/latest/src/client/java/com/example/docs/projectile/ExampleModProjectileClient.java#renderer
-
-## Finalizing the Item {#finalizing-the-item}
-
-At this point, you can obtain the projectile item in game and test out the functionality.
-
-However, you'll notice it still doesn't have a [model](../items/first-item#adding-a-model), [texture](../items/first-item#adding-a-texture), [client item](../items/first-item#creating-the-client-item) or a [name](../items/first-item#naming-the-item). Let's create the files using the identifier `hot_tater` in order to render everything properly. An example texture is provided below.
+Don't forget to add a [model](../items/first-item#adding-a-model), [texture](../items/first-item#adding-a-texture), [client item](../items/first-item#creating-the-client-item), and [name](../items/first-item#naming-the-item), using the identifier `hot_tater`:
 
 <DownloadEntry visualURL="/assets/develop/projectiles/hot_tater.png" downloadURL="/assets/develop/projectiles/hot_tater_small.png">Texture</DownloadEntry>
 
-Now you can test your projectile in-game:
+Register the entity too, like we did in the [Creating Your First Entity](./first-entity#preparing-your-first-entity) guide:
+
+<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#register_entity
+
+Finally, let's use the vanilla `ThrownItemRenderer` in the client initializer:
+
+<<< @/reference/latest/src/client/java/com/example/docs/projectile/ExampleModProjectileClient.java#renderer
+
+And you're done!
 
 <VideoPlayer src="/assets/develop/projectiles/hot-tater.mp4">A Hot Tater setting a villager on fire</VideoPlayer>
