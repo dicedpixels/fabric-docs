@@ -42,11 +42,9 @@ public class ExampleModProjectile implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		// #region creative_tab
 		CreativeModeTabEvents.modifyOutputEvent(ModItems.CUSTOM_CREATIVE_TAB_KEY).register(tab -> {
 			tab.accept(HOT_TATER_ITEM);
 		});
-		// #endregion creative_tab
 	}
 }
 // #endregion entrypoint
