@@ -52,7 +52,7 @@ Defines the item form of this projectile.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterEntity.java#default_item
 
-::: info
+::: warning IMPORTANT
 
 Your IDE might tell you that it cannot resolve the item: we will create it soon, in the [Registration](#registration) section.
 
@@ -104,13 +104,13 @@ For more information, see the [Minecraft Wiki's article on projectiles](https://
 
 ::: details Why is the parameter called `yOffset`?
 
-We don't know either, dear reader. Despite the name, the offset is applied to the pitch, the rotation of the velocity around the X axis:
+We don't know either, dear reader. Despite the name, [the offset is applied to the pitch](https://mcsrc.dev/2/26.2/net/minecraft/world/entity/projectile/Projectile#L156), which is the rotation of the *velocity* around the X axis:
 
 ```java
 float yd = -Mth.sin((xRot + yOffset) * (float) (Math.PI / 180.0));
 ```
 
-For example, vanilla uses a [`yOffset` of `-20.0F` for splash potions](https://mcsrc.dev/2/26.2/net/minecraft/world/item/ThrowablePotionItem#L28), which changes the initial velocity pitch from `source.getXRot()` to `source.getXRot() - 20.0F` (20 degrees upward, toward the sky).
+For example, when vanilla uses a [`yOffset` of `-20.0F` for splash potions](https://mcsrc.dev/2/26.2/net/minecraft/world/item/ThrowablePotionItem#L28), it changes the initial velocity pitch from `source.getXRot()` to `source.getXRot() - 20.0F` (20 degrees upward, toward the sky).
 
 Perhaps a more apt name would have been `xRotOffset`.
 
@@ -128,13 +128,9 @@ Register the item, like we did in the [Creating Your First Item](../items/first-
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#register_item
 
-We also add the item to a creative tab for easy access, like we did in the [Adding the Item to a Creative Tab](../items/first-item#adding-the-item-to-a-creative-tab) guide:
+Don't forget to add a [model](../items/first-item#adding-a-model), [texture](../items/first-item#adding-a-texture), [client item](../items/first-item#creating-the-client-item), and [name](../items/first-item#naming-the-item), using the identifier `hot_tater`. You should also [add the item to a creative tab](../items/first-item#adding-the-item-to-a-creative-tab). Here's an example texture:
 
-<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#creative_tab
-
-Don't forget to add a [model](../items/first-item#adding-a-model), [texture](../items/first-item#adding-a-texture), [client item](../items/first-item#creating-the-client-item), and [name](../items/first-item#naming-the-item), using the identifier `hot_tater`:
-
-<DownloadEntry visualURL="/assets/develop/projectiles/hot_tater.png" downloadURL="/assets/develop/projectiles/hot_tater_small.png">Texture</DownloadEntry>
+<DownloadEntry visualURL="/assets/develop/projectiles/hot_tater_preview.png" downloadURL="/assets/develop/projectiles/hot_tater.png">Texture</DownloadEntry>
 
 Register the entity too, like we did in the [Creating Your First Entity](./first-entity#preparing-your-first-entity) guide:
 

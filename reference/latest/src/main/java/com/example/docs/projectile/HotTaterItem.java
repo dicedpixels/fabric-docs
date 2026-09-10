@@ -44,7 +44,7 @@ public class HotTaterItem extends Item implements ProjectileItem {
 					itemStack,
 					player,
 					/* yOffset: */ 0.0F,
-					/* power: */ 1.5F,
+					/* pow: */ 1.5F,
 					/* uncertainty: */ 1.0F);
 		}
 
