@@ -14,7 +14,6 @@ import com.example.docs.block.ModBlocks;
 import com.example.docs.enchantment.ModEnchantments;
 import com.example.docs.entity.ModEntityTypes;
 import com.example.docs.item.ModItems;
-import com.example.docs.projectile.ExampleModProjectile;
 
 // #region datagen_translations_provider
 public class ExampleModEnglishLangProvider extends FabricLanguageProvider {
@@ -45,7 +44,7 @@ public class ExampleModEnglishLangProvider extends FabricLanguageProvider {
 		translationBuilder.add(ModItems.ENHANCED_HOE, "Enhanced Hoe");
 		translationBuilder.add(ModItems.DIMENSIONAL_CRYSTAL, "Dimensional Crystal");
 		translationBuilder.add(ModItems.THROWING_KNIVES, "Throwing Knives");
-		translationBuilder.add(ExampleModProjectile.HOT_TATER_ITEM, "Hot Tater");
+		translationBuilder.add(ModItems.HOT_TATER, "Hot Tater");
 
 		translationBuilder.add(Util.makeDescriptionId("effect", Identifier.fromNamespaceAndPath(ExampleMod.MOD_ID, "tater")), "Tater");
 

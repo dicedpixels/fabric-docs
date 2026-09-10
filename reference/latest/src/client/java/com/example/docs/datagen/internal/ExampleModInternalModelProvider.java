@@ -13,7 +13,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import com.example.docs.block.ModBlocks;
 import com.example.docs.block.custom.PrismarineLampBlock;
 import com.example.docs.item.ModItems;
-import com.example.docs.projectile.ExampleModProjectile;
 
 /**
  * This generator is just for the reference item and block models.
@@ -51,7 +50,7 @@ public class ExampleModInternalModelProvider extends FabricModelProvider {
 		itemModelGenerator.generateFlatItem(ModItems.POISONOUS_APPLE, ModelTemplates.FLAT_ITEM);
 		itemModelGenerator.generateFlatItem(ModItems.SUSPICIOUS_SUBSTANCE, ModelTemplates.FLAT_ITEM);
 		itemModelGenerator.generateFlatItem(ModItems.GUIDITE_SWORD, ModelTemplates.FLAT_HANDHELD_ITEM);
-		itemModelGenerator.generateFlatItem(ExampleModProjectile.HOT_TATER_ITEM, ModelTemplates.FLAT_ITEM);
+		itemModelGenerator.generateFlatItem(ModItems.HOT_TATER, ModelTemplates.FLAT_ITEM);
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
 import com.example.docs.entity.ModEntityTypes;
+import com.example.docs.item.ModItems;
 
 // #region entity
 @NullMarked
@@ -39,7 +40,7 @@ public class HotTaterEntity extends ThrowableItemProjectile {
 		// #endregion entity
 		// [!code warning:1]
 		// #region entity
-		return ExampleModProjectile.HOT_TATER_ITEM;
+		return ModItems.HOT_TATER;
 	}
 	// #endregion default_item
 

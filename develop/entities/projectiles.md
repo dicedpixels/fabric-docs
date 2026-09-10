@@ -122,17 +122,19 @@ Finally, we award the `ITEM_USED` stat, consume one item from the stack, and mar
 
 ## Registration {#registration}
 
-Register the item, like we did in the [Creating Your First Item](../items/first-item#registering-an-item) guide. We define an identifier for the item, which the entity type will also use:
+Register the item, like we did in the [Creating Your First Item](../items/first-item#registering-an-item) guide. First, define the item's key in `ModItemIds`:
 
-<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#identifier
+<<< @/reference/latest/src/main/java/com/example/docs/item/ModItemIds.java#hot_tater
 
-<<< @/reference/latest/src/main/java/com/example/docs/projectile/ExampleModProjectile.java#register_item
+Then register the item in `ModItems`, alongside the others:
+
+<<< @/reference/latest/src/main/java/com/example/docs/item/ModItems.java#hot_tater
 
 Don't forget to add a [model](../items/first-item#adding-a-model), [texture](../items/first-item#adding-a-texture), [client item](../items/first-item#creating-the-client-item), and [name](../items/first-item#naming-the-item), using the identifier `hot_tater`. You should also [add the item to a creative tab](../items/first-item#adding-the-item-to-a-creative-tab). Here's an example texture:
 
 <DownloadEntry visualURL="/assets/develop/projectiles/hot_tater_preview.png" downloadURL="/assets/develop/projectiles/hot_tater.png">Texture</DownloadEntry>
 
-Register the entity too, like we did in the [Creating Your First Entity](./first-entity#preparing-your-first-entity) guide, by adding it as a static field in `ModEntityTypes`:
+Register the entity too, like we did in the [Creating Your First Entity](./first-entity#preparing-your-first-entity) guide, by adding it as a static field in `ModEntityTypes`. Since entities and items live in separate registries, the entity type simply uses the same path as the item, like vanilla's `snowball`:
 
 <<< @/reference/latest/src/main/java/com/example/docs/entity/ModEntityTypes.java#hot_tater
 
