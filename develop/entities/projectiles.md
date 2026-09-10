@@ -98,7 +98,7 @@ In addition to the standard parameters (level, item stack, and player), this uti
 
 - `yOffset`: Offset for the pitch (rotation around the X axis, upward or downward), in degrees. Negative values angle the initial velocity upward.
 - `pow`: Multiplier for the speed of the projectile movement.
-- `uncertainty`: Imprecision of the projectile. 0 means no random spread. As the value increases, the thrown projectiles get more dispersed.
+- `uncertainty`: Imprecision of the projectile. 0 means no random spread. As the value increases, projectiles will be more dispersed, even when thrown with the same initial position and rotation.
 
 For more information, see the [Minecraft Wiki's article on projectiles](https://minecraft.wiki/w/Projectile#Initial_conditions).
 
