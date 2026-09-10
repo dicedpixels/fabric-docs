@@ -104,7 +104,7 @@ For more information, see the [Minecraft Wiki's article on projectiles](https://
 
 ::: details Why is the parameter called `yOffset`?
 
-We don't know either, dear reader. Despite the name, [the offset is applied to the pitch](https://mcsrc.dev/2/26.2/net/minecraft/world/entity/projectile/Projectile#L156), which is the rotation of the *velocity* around the X axis:
+We don't know either, dear reader. Despite the name, [the offset is applied to the pitch](https://mcsrc.dev/2/26.2/net/minecraft/world/entity/projectile/Projectile#L156), which is the rotation of the _velocity_ around the X axis:
 
 ```java
 float yd = -Mth.sin((xRot + yOffset) * (float) (Math.PI / 180.0));
