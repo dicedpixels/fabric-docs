@@ -6,6 +6,8 @@ authors:
   - cassiancc
   - ChampionAsh5357
   - dicedpixels
+  - Earthcomputer
+  - ekulxam
   - haykam
   - kanpov
   - NetUserGet
@@ -94,11 +96,27 @@ Defines the action that happens when the item is used. In our case, we call the 
 
 In addition to the standard parameters (level, item stack, and player), this utility method takes three additional floats:
 
-- **Y-Offset**: Rotation in the y direction (looking up or down).
-- **Power**: Scales how fast the projectile moves in blocks.
-- **Uncertainty**: Range of directions that the projectile can randomly go in when shot.
+- `yOffset`: Offset for the pitch (rotation around the X axis, upward or downward), in degrees. Negative values angle the initial velocity upward.
+- `pow`: Multiplier for the speed of the projectile movement.
+- `uncertainty`: Quantification of the inaccuracy (spread of directions) of the projectile. `0` means no random spread.
 
-Finally, we award the `ITEM_USED` stat, consume one item from the stack and mark the interaction as successful.
+For more information, see the [Minecraft Wiki's article on projectiles](https://minecraft.wiki/w/Projectile#Initial_conditions).
+
+::: details Why is the parameter called `yOffset`?
+
+We don't know either, dear reader. Despite the name, the offset is applied to the pitch, the rotation of the velocity around the X axis:
+
+```java
+float yd = -Mth.sin((xRot + yOffset) * (float) (Math.PI / 180.0));
+```
+
+For example, vanilla uses a [`yOffset` of `-20.0F` for splash potions](https://mcsrc.dev/2/26.2/net/minecraft/world/item/ThrowablePotionItem#L28), which changes the initial velocity pitch from `source.getXRot()` to `source.getXRot() - 20.0F` (20 degrees upward, toward the sky).
+
+Perhaps a more apt name would have been `xRotOffset`.
+
+:::
+
+Finally, we award the `ITEM_USED` stat, consume one item from the stack, and mark the interaction as successful.
 
 <<< @/reference/latest/src/main/java/com/example/docs/projectile/HotTaterItem.java#use
 
